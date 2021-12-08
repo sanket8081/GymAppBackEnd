@@ -41,6 +41,11 @@ public class User {
 	@Column(name="is_admin")
 	private String isAdmin;
 	
+	private String freeze;
+	
+	@Column(name="freezedate")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	private Date freezeDate;
 	
 	@Column(name="effectivedate")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -62,30 +67,103 @@ public class User {
 	{
 		
 	}
-	
-	public User(String photoId, String userId, String username, String emailId, long mobileNumber, String address,
-			Date dob, String isAdmin, Date effectiveDate, Date expirationDate) {
-		super();
-		this.photoId = photoId;
-		this.userId = userId;
-		this.userName = username;
-		this.emailId = emailId;
-		this.contactNumber = mobileNumber;
-		this.address = address;
-		this.dob = dob;
-		this.isAdmin = isAdmin;
-		this.effectiveDate = effectiveDate;
-		this.expirationDate = expirationDate;
-	}
-	
-	public List<UserWorkout> getUserWorkout() {
-		return userWorkout;
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserWorkout(List<UserWorkout> userWorkout) {
-		this.userWorkout = userWorkout;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	
+
+	public String getPhotoId() {
+		return photoId;
+	}
+
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public long getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(long contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getFreeze() {
+		return freeze;
+	}
+
+	public void setFreeze(String freeze) {
+		this.freeze = freeze;
+	}
+
+	public Date getFreezeDate() {
+		return freezeDate;
+	}
+
+	public void setFreezeDate(Date freezeDate) {
+		this.freezeDate = freezeDate;
+	}
+
+	public Date getEffectiveDate() {
+		return effectiveDate;
+	}
+
+	public void setEffectiveDate(Date effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
 	public List<Payment> getPayments() {
 		return payments;
 	}
@@ -94,64 +172,33 @@ public class User {
 		this.payments = payments;
 	}
 
-	public String getPhotoId() {
-		return photoId;
+	public List<UserWorkout> getUserWorkout() {
+		return userWorkout;
 	}
-	public void setPhotoId(String photoId) {
-		this.photoId = photoId;
+
+	public void setUserWorkout(List<UserWorkout> userWorkout) {
+		this.userWorkout = userWorkout;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
+
+	public User(String userId, String photoId, String userName, String emailId, long contactNumber, String address,
+			Date dob, String isAdmin, String freeze, Date freezeDate, Date effectiveDate, Date expirationDate,
+			List<Payment> payments, List<UserWorkout> userWorkout) {
+		super();
 		this.userId = userId;
-	}
-	public String getUsername() {
-		return userName;
-	}
-	public void setUsername(String username) {
-		this.userName = username;
-	}
-	public String getEmailId() {
-		return emailId;
-	}
-	public void setEmailId(String emailId) {
+		this.photoId = photoId;
+		this.userName = userName;
 		this.emailId = emailId;
-	}
-	public long getContactNumber() {
-		return contactNumber;
-	}
-	public void setContactNumber(long mobileNumber) {
-		this.contactNumber = mobileNumber;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
+		this.contactNumber = contactNumber;
 		this.address = address;
-	}
-	public Date getDob() {
-		return dob;
-	}
-	public void setDob(Date dob) {
 		this.dob = dob;
-	}
-	public String getIsAdmin() {
-		return isAdmin;
-	}
-	public void setIsAdmin(String isAdmin) {
 		this.isAdmin = isAdmin;
-	}
-	public Date getEffectiveDate() {
-		return effectiveDate;
-	}
-	public void setEffectiveDate(Date effectiveDate) {
+		this.freeze = freeze;
+		this.freezeDate = freezeDate;
 		this.effectiveDate = effectiveDate;
-	}
-	public Date getExpirationDate() {
-		return expirationDate;
-	}
-	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
+		this.payments = payments;
+		this.userWorkout = userWorkout;
 	}
+
+	
 }

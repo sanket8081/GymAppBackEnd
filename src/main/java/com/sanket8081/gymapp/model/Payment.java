@@ -2,10 +2,15 @@ package com.sanket8081.gymapp.model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "payment_details")
@@ -26,17 +31,29 @@ public class Payment {
 	@Column(name="is_paid")
 	private String isPaid;
 	
-	private String freeze;
-	
-	@Column(name="freezedate")
-	private Date freezeDate;
-	
 	@Column(name="effectivedate")
 	private Date  effectiveDate;
 	
 	@Column(name="expirationdate")
 	private Date  expirationDate;
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userPayId" ,referencedColumnName = "user_id")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
 	public Payment()
 	{
 		
@@ -45,17 +62,16 @@ public class Payment {
 	
 
 	public Payment(String paymentId, String duration, String existingMember, String totalFee, String isPaid,
-			String freeze, Date freezeDate, Date effectiveDate, Date expirationDate) {
+			 Date effectiveDate, Date expirationDate,User user) {
 		super();
 		this.paymentId = paymentId;
 		this.duration = duration;
 		this.existingMember = existingMember;
 		this.totalFee = totalFee;
 		this.isPaid = isPaid;
-		this.freeze = freeze;
-		this.freezeDate = freezeDate;
 		this.effectiveDate = effectiveDate;
 		this.expirationDate = expirationDate;
+		this.user=user;
 	}
 
 
@@ -100,21 +116,6 @@ public class Payment {
 		this.isPaid = isPaid;
 	}
 
-	public String getFreeze() {
-		return freeze;
-	}
-
-	public void setFreeze(String freeze) {
-		this.freeze = freeze;
-	}
-
-	public Date getFreezeDate() {
-		return freezeDate;
-	}
-
-	public void setFreezeDate(Date freezeDate) {
-		this.freezeDate = freezeDate;
-	}
 
 	public Date getEffectiveDate() {
 		return effectiveDate;

@@ -1,11 +1,16 @@
 package com.sanket8081.gymapp.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user_workout_details")
@@ -18,6 +23,19 @@ public class UserWorkout {
 	@Column(name = "workout_information")
 	private String workoutInformation;
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "userWorkoutId" ,referencedColumnName = "user_id")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public UserWorkout() {}
 	
 	public long getId() {
@@ -44,10 +62,12 @@ public class UserWorkout {
 		this.workoutInformation = workoutInformation;
 	}
 
-	public UserWorkout(String day, String workoutInformation) {
+	public UserWorkout(String day, String workoutInformation,User user) {
 		super();
 		this.day = day;
 		this.workoutInformation = workoutInformation;
+		this.user = user;
+		
 	}
 	
 	
