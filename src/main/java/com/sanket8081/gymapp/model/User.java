@@ -27,6 +27,9 @@ public class User {
 	@Column(name="user_name")
 	private String userName;
 	
+	@Column(name="password")
+	private String password;
+	
 	@Column(name="email_id")
 	private String emailId;
 	
@@ -67,7 +70,7 @@ public class User {
 	{
 		
 	}
-
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -90,6 +93,14 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmailId() {
@@ -180,13 +191,14 @@ public class User {
 		this.userWorkout = userWorkout;
 	}
 
-	public User(String userId, String photoId, String userName, String emailId, long contactNumber, String address,
+	public User(String userId, String photoId, String userName,String password, String emailId, long contactNumber, String address,
 			Date dob, String isAdmin, String freeze, Date freezeDate, Date effectiveDate, Date expirationDate,
 			List<Payment> payments, List<UserWorkout> userWorkout) {
 		super();
 		this.userId = userId;
 		this.photoId = photoId;
 		this.userName = userName;
+		this.password = password;
 		this.emailId = emailId;
 		this.contactNumber = contactNumber;
 		this.address = address;

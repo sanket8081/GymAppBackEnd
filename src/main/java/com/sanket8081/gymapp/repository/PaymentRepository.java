@@ -14,5 +14,7 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
 	@Query("from Payment where user_pay_id like ?1 ")
 	List<Payment> findPaymentsByUserId(String userId);
 	
+	@Query(value ="select sum(total_fee) from payment_details", nativeQuery = true)
+	 int totalRevenue();
 	
 }

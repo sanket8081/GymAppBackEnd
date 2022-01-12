@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sanket8081.gymapp.exception.ResourceNotFoundException;
 import com.sanket8081.gymapp.model.User;
 import com.sanket8081.gymapp.repository.UserRepository;
+import com.sanket8081.gymapp.services.UserService;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -25,6 +26,9 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
 
 	//get All user list
 	@GetMapping("/users")
@@ -35,9 +39,16 @@ public class UserController {
 	
 	//create user
 	@PostMapping("/users")
-	public User createUser(@RequestBody User user)
+	public String createUser(@RequestBody User user)
 	{
-		return userRepository.save(user);
+		String newUserId="";
+		User newUser = userService.addUser(user);
+		if(user.getUserId()!=null)
+		{
+			newUserId = newUser.getUserId();
+		}
+		
+		return newUserId;
 	}
 	
 	//get User by Id
@@ -60,9 +71,10 @@ public class UserController {
 		user.setAddress(userDetails.getAddress());
 		user.setContactNumber(userDetails.getContactNumber());
 		user.setEmailId(userDetails.getEmailId());
-		user.setIsAdmin(userDetails.getIsAdmin());
-		user.setEffectiveDate(userDetails.getEffectiveDate());
-		user.setExpirationDate(userDetails.getExpirationDate());
+		user.setPassword(userDetails.getPassword());
+		//user.setIsAdmin(userDetails.getIsAdmin());
+		//user.setEffectiveDate(userDetails.getEffectiveDate());
+		//user.setExpirationDate(userDetails.getExpirationDate());
 		
 		User updatedUser = userRepository.save(user);
 		return ResponseEntity.ok(updatedUser);
