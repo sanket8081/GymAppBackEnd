@@ -51,8 +51,8 @@ public class UserServiceTestMockitoExample {
 		when(userRepository.save(Mockito.any(User.class))).thenReturn(userMock);
 		
 		//save the user
-		User dummyUser = new User();
-		User newUser = userService.addUser(dummyUser);
+		//User dummyUser = new User();
+		User newUser = userService.addUser(userMock);
 		
 		//verify the save
 		assertEquals("sj424b", newUser.getUserId());
