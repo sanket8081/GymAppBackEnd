@@ -3,6 +3,7 @@ package com.sanket8081.gymapp.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +61,16 @@ public class UserController {
 	{
 		User user = userRepository.findById(userId)
 				.orElseThrow(()-> new ResourceNotFoundException("User not exist with id: "+userId));
+		return ResponseEntity.ok(user);
+	}
+	
+	@GetMapping("/users/email/{userEmailId}")
+	public ResponseEntity<User> getUserByEmailId(@PathVariable  String userEmailId)
+	{
+		User user = userRepository.findByUserEmailId(userEmailId)
+				.orElseThrow(()-> new ResourceNotFoundException("User not exist with email-id: "+userEmailId));
+				
+		
 		return ResponseEntity.ok(user);
 	}
 
